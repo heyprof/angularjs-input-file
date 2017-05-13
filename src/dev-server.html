@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Birthday Selector</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body ng-app="dev-server" ng-strict-di>
+  <input-file data-ng-model="files"></input-file>
+  <input-file data-ng-model="files" multiple="true"></input-file>
+  <input-file data-ng-model="files" multiple="false"></input-file>
+  <input-file data-ng-model="files" multiple></input-file>
+  <img ng-repeat="file in files" ng-src="{{file.binary}}" height="170" />
+  <pre>{{ files | json }}</pre>
+</body>
+</html>
