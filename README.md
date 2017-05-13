@@ -36,6 +36,9 @@ Finally, if you want generate the dist folder: `npm run build`
 
 That's it, you can create fork and submit your updates :)
 
+- [Npm Guide](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+- [Bower Guide](https://bower.io/docs/creating-packages/)
+
 ### LICENCE
 
 MIT License
