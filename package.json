@@ -1,6 +1,6 @@
 {
   "name": "angularjs-input-file",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AngularJS Component for file selector",
   "author": {
     "name": "Arthur Agombart",
