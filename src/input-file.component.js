@@ -1,5 +1,3 @@
-import angular from 'angular';
-
 class InputFileComponent {
   /** @ngInject */
   constructor($timeout, $element, $attrs) {
