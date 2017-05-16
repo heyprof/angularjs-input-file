@@ -1,44 +1,35 @@
-## angularjs-input-file
+## Install
 
-An AngularJS component to select a file.
+- npm: `npm install --save angularjs-input-file`
+- bower: `bower install --save angularjs-input-file`
 
-### Install
+## Demo
 
-npm: `npm install --save angularjs-input-file`
+<input-file data-ng-model="files"></input-file>
 
-or
+## Usage
 
-bower: `bower install --save angularjs-input-file`
-
-### Usage
-
-Add the module in your app:
+Add module to your app:
 
 ```javascript
-angular.module('myApp', ['angularjs-input-file'])
+angular.module('app', ['angularjs-input-file']);
 ```
 
-Add the component in your project:
+And the component where you want in this app:
 
 ```html
-<input-file data-ng-model="$ctrl.myData"></input-file>
+<input-file data-ng-model="files"></input-file>
 ```
 
-**See [example page](https://heyprof.github.io/angularjs-input-file/) for more informations and options doc**
+See data in your view:
 
-### Contrib
+```html
+<img ng-repeat="file in files" ng-src="{{file.binary}}" height="170" />
+```
 
-Start you should play with dependencies: `npm install`
+## LICENCE MIT
 
-Then you should be able to develop with: `npm run serve` (with hot reload)
-
-Finally, if you want generate the dist folder: `npm run build`
-
-That's it, you can create fork and submit your updates :)
-
-### LICENCE
-
-MIT License
+The MIT License (MIT)
 
 Copyright (c) 2017 HeyProf!
 

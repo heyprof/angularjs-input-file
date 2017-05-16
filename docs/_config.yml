@@ -1,0 +1,6 @@
+theme: jekyll-theme-slate
+title: Angular Input File
+description: An AngularJS component to select a file
+
+show_downloads: true
+google_analytics: UA-99226656-2
