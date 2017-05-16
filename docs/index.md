@@ -24,7 +24,7 @@ And the component where you want in this app:
 See data in your view:
 
 ```html
-<img ng-repeat="file in files" ng-src="{{file.binary}}" height="170" />
+<img ng-repeat="file in files" ng-src="\{\{file.binary\}\}" height="170" />
 ```
 
 ## LICENCE MIT
