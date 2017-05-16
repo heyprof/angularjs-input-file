@@ -34,6 +34,12 @@ That's it, you can create fork and submit your updates :)
 - [Npm Guide](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 - [Bower Guide](https://bower.io/docs/creating-packages/)
 
+### Execute tests TODO
+
+*Warning: Not implemented yet*
+
+`npm test`
+
 ### LICENCE
 
 MIT License
