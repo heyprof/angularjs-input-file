@@ -4,27 +4,22 @@ An AngularJS component to select a file.
 
 ### Install
 
-npm: `npm install --save angularjs-input-file`
+- npm: `npm install --save angularjs-input-file`
+- bower: `bower install --save angularjs-input-file`
 
-or
+### Technical specs:
 
-bower: `bower install --save angularjs-input-file`
+Features:
+- Easy AngularJS 1.5+ Component
+- Bind ng-model with input type file
+- No default css applied
+
+Incoming-features:
+- Hook an event when files loaded
 
 ### Usage
 
-Add the module in your app:
-
-```javascript
-angular.module('myApp', ['angularjs-input-file'])
-```
-
-Add the component in your project:
-
-```html
-<input-file data-ng-model="$ctrl.myData"></input-file>
-```
-
-**See [example page](https://heyprof.github.io/angularjs-input-file/) for more informations and options doc**
+**See [example page](https://heyprof.github.io/angularjs-input-file/) for doc and demo**
 
 ### Contrib
 

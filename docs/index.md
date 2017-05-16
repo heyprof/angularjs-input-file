@@ -6,6 +6,7 @@
 ## Demo
 
 <input-file data-ng-model="files"></input-file>
+<img ng-repeat="file in files" ng-src="{{file.binary}}" height="170" />
 
 ## Usage
 
@@ -21,10 +22,18 @@ And the component where you want in this app:
 <input-file data-ng-model="files"></input-file>
 ```
 
+`files` data format look like:
 See data in your view:
 
-```html
-<img ng-repeat="file in files" ng-src="\{\{file.binary\}\}" height="170" />
+```json
+[
+  {
+    "fileName": "Name of the file",
+    "fileInfo": {}, // File MetaDatas
+    "binary": "base64 formatted binary"
+  },
+  [... if `multiple` is defined]
+]
 ```
 
 ## LICENCE MIT
