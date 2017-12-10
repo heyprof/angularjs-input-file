@@ -13,7 +13,7 @@ class InputFileComponent {
     if (this.$attrs.multiple !== 'false' && (this.$attrs.multiple === '' || this.$attrs.multiple)) {
       inputElement.setAttribute('multiple', '');
     }
-    inputElement.addEventListener('change', event => this.onInputChange(event), false);
+    inputElement.addEventListener('change', this.onInputChange, false);
   }
 
   onInputChange(event) {
