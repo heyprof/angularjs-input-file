@@ -24,15 +24,30 @@ class InputFileComponent {
         continue;
       }
 
+    const fileLoaded = files.map(file => new Promise((resolve, reject) => {
       const reader = new FileReader();
+
+      // See event handlers of `FileReader` here:
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader#Properties
+
+      // Catch errors to reject
+      reader.onabort = reject;
+      reader.onerror = reject;
+
       // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh
-      reader.onload = (fileInfo => readerEvent => this.$timeout(() => {
-        this.ngModel.push({fileName: fileInfo.name, fileInfo, binary: readerEvent.target.result});
+      reader.onload = (infos => readerEvent => this.$timeout(() => {
+        const fileLoaded = {infos, file: readerEvent.target.result};
+        this.ngModel.push(fileLoaded);
+        resolve(fileLoaded);
       }))(file);
       reader.readAsDataURL(file);
-    }
 
     return event;
+    }));
+
+    return Promise.all(fileLoaded).then(response => {
+      this.ngChange(response);
+    });
   }
 }
 
@@ -42,6 +57,6 @@ angular.module('angularjs-input-file', []).component('inputFile', {
   bindings: {
     fileType: '@',
     ngModel: '=',
-    onChange: '&' // TODO Check promise.all with loop file
+    ngChange: '&'
   }
 });
