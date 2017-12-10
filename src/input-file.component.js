@@ -41,7 +41,6 @@ class InputFileComponent {
         resolve(fileLoaded);
       }))(file);
 
-    return event;
       switch (this.fileFormat) {
         case 'Text':
           reader.readAsText(file);
