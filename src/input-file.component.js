@@ -18,12 +18,11 @@ class InputFileComponent {
 
   onInputChange(event) {
     const files = event.target.files;
-    this.ngModel = [];
-    for (const file of files) {
-      if (!file.type.match('image.*')) {
-        continue;
-      }
-
+    if (this.ngModel) {
+      this.ngModel.length = 0;
+    } else {
+      this.ngModel = [];
+    }
     const fileLoaded = files.map(file => new Promise((resolve, reject) => {
       const reader = new FileReader();
 
