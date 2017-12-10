@@ -91,64 +91,64 @@ var InputFileComponent = function () {
   _createClass(InputFileComponent, [{
     key: '$onInit',
     value: function $onInit() {
-      var _this = this;
-
       var inputElement = this.$element[0].getElementsByTagName('input')[0];
 
       // If there is a multiple attribute different than "false"
       if (this.$attrs.multiple !== 'false' && (this.$attrs.multiple === '' || this.$attrs.multiple)) {
         inputElement.setAttribute('multiple', '');
       }
-      inputElement.addEventListener('change', function (event) {
-        return _this.onInputChange(event);
-      }, false);
+      inputElement.addEventListener('change', this.onInputChange, false);
     }
   }, {
     key: 'onInputChange',
     value: function onInputChange(event) {
-      var _this2 = this;
+      var _this = this;
 
       var files = event.target.files;
-      this.ngModel = [];
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var file = _step.value;
-
-          if (!file.type.match('image.*')) {
-            continue;
-          }
-
+      if (this.ngModel) {
+        this.ngModel.length = 0;
+      } else {
+        this.ngModel = [];
+      }
+      var fileLoaded = files.map(function (file) {
+        return new Promise(function (resolve, reject) {
           var reader = new FileReader();
+
+          // See event handlers of `FileReader` here:
+          // https://developer.mozilla.org/en-US/docs/Web/API/FileReader#Properties
+
+          // Catch errors to reject
+          reader.onabort = reject;
+          reader.onerror = reject;
+
           // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh
-          reader.onload = function (fileInfo) {
+          reader.onload = function (infos) {
             return function (readerEvent) {
-              return _this2.$timeout(function () {
-                _this2.ngModel.push({ fileName: fileInfo.name, fileInfo: fileInfo, binary: readerEvent.target.result });
+              return _this.$timeout(function () {
+                var fileLoaded = { infos: infos, file: readerEvent.target.result };
+                _this.ngModel.push(fileLoaded);
+                resolve(fileLoaded);
               });
             };
           }(file);
-          reader.readAsDataURL(file);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
 
-      return event;
+          switch (_this.fileFormat) {
+            case 'Text':
+              reader.readAsText(file);
+              break;
+            case 'Base64':
+              reader.readAsDataURL(file);
+              break;
+            case 'ArrayBuffer':
+            default:
+              reader.readAsArrayBuffer(file);
+          }
+        });
+      });
+
+      return Promise.all(fileLoaded).then(function (response) {
+        _this.ngChange(response);
+      });
     }
   }]);
 
@@ -156,12 +156,14 @@ var InputFileComponent = function () {
 }();
 
 angular.module('angularjs-input-file', []).component('inputFile', {
-  template: '<input type="file" />',
+  template: '<input type="file" accept="{{ $ctrl.accept }}" />',
   controller: InputFileComponent,
   bindings: {
+    accept: '@',
+    fileFormat: '@',
     fileType: '@',
     ngModel: '=',
-    onChange: '&' // TODO Check promise.all with loop file
+    ngChange: '&'
   }
 });
 
