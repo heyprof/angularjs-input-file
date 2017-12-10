@@ -40,9 +40,19 @@ class InputFileComponent {
         this.ngModel.push(fileLoaded);
         resolve(fileLoaded);
       }))(file);
-      reader.readAsDataURL(file);
 
     return event;
+      switch (this.fileFormat) {
+        case 'Text':
+          reader.readAsText(file);
+          break;
+        case 'Base64':
+          reader.readAsDataURL(file);
+          break;
+        case 'ArrayBuffer':
+        default:
+          reader.readAsArrayBuffer(file);
+      }
     }));
 
     return Promise.all(fileLoaded).then(response => {
@@ -55,6 +65,7 @@ angular.module('angularjs-input-file', []).component('inputFile', {
   template: '<input type="file" />',
   controller: InputFileComponent,
   bindings: {
+    fileFormat: '@',
     fileType: '@',
     ngModel: '=',
     ngChange: '&'
