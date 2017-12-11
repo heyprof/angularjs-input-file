@@ -13,17 +13,17 @@ class InputFileComponent {
     if (this.$attrs.multiple !== 'false' && (this.$attrs.multiple === '' || this.$attrs.multiple)) {
       inputElement.setAttribute('multiple', '');
     }
-    inputElement.addEventListener('change', this.onInputChange, false);
+    inputElement.addEventListener('change', event => this.onInputChange(event), false);
   }
 
   onInputChange(event) {
-    const files = event.target.files;
-    if (this.ngModel) {
-      this.ngModel.length = 0;
-    } else {
-      this.ngModel = [];
-    }
-    const fileLoaded = files.map(file => new Promise((resolve, reject) => {
+    const inputFiles = event.target.files;
+    const files = [];
+    const fileLoaded = [...inputFiles].map(inputFile => new Promise((resolve, reject) => {
+      if (!this.fileFormat) {
+        resolve(inputFile);
+        return;
+      }
       const reader = new FileReader();
 
       // See event handlers of `FileReader` here:
@@ -33,28 +33,40 @@ class InputFileComponent {
       reader.onabort = reject;
       reader.onerror = reject;
 
+      console.log(inputFile);
+
       // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh
       reader.onload = (infos => readerEvent => this.$timeout(() => {
-        const fileLoaded = {infos, file: readerEvent.target.result};
-        this.ngModel.push(fileLoaded);
+        const fileLoaded = {
+          infos,
+          file: readerEvent.target.result
+        };
+        files.push(fileLoaded);
         resolve(fileLoaded);
-      }))(file);
+      }))({
+        name: inputFile.name,
+        size: inputFile.size,
+        type: inputFile.type,
+        lastModified: inputFile.lastModified
+      });
 
       switch (this.fileFormat) {
         case 'Text':
-          reader.readAsText(file);
+          reader.readAsText(inputFile);
           break;
         case 'Base64':
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(inputFile);
           break;
         case 'ArrayBuffer':
         default:
-          reader.readAsArrayBuffer(file);
+          reader.readAsArrayBuffer(inputFile);
       }
     }));
 
     return Promise.all(fileLoaded).then(response => {
-      this.ngChange(response);
+      if (this.filesLoaded) {
+        this.filesLoaded(response);
+      }
     });
   }
 }
@@ -66,7 +78,6 @@ angular.module('angularjs-input-file', []).component('inputFile', {
     accept: '@',
     fileFormat: '@',
     fileType: '@',
-    ngModel: '=',
-    ngChange: '&'
+    filesLoaded: '<'
   }
 });
