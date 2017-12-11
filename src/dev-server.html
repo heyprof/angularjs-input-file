@@ -8,11 +8,6 @@
 </head>
 
 <body ng-app="dev-server" ng-strict-di>
-  <input-file data-ng-model="files"></input-file>
-  <input-file data-ng-model="files" multiple="true"></input-file>
-  <input-file data-ng-model="files" multiple="false"></input-file>
-  <input-file data-ng-model="files" multiple></input-file>
-  <img ng-repeat="file in files" ng-src="{{file.binary}}" height="170" />
-  <pre>{{ files | json }}</pre>
+<dev-server></dev-server>
 </body>
 </html>
