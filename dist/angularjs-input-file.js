@@ -75,6 +75,8 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var InputFileComponent = function () {
@@ -91,27 +93,31 @@ var InputFileComponent = function () {
   _createClass(InputFileComponent, [{
     key: '$onInit',
     value: function $onInit() {
+      var _this = this;
+
       var inputElement = this.$element[0].getElementsByTagName('input')[0];
 
       // If there is a multiple attribute different than "false"
       if (this.$attrs.multiple !== 'false' && (this.$attrs.multiple === '' || this.$attrs.multiple)) {
         inputElement.setAttribute('multiple', '');
       }
-      inputElement.addEventListener('change', this.onInputChange, false);
+      inputElement.addEventListener('change', function (event) {
+        return _this.onInputChange(event);
+      }, false);
     }
   }, {
     key: 'onInputChange',
     value: function onInputChange(event) {
-      var _this = this;
+      var _this2 = this;
 
-      var files = event.target.files;
-      if (this.ngModel) {
-        this.ngModel.length = 0;
-      } else {
-        this.ngModel = [];
-      }
-      var fileLoaded = files.map(function (file) {
+      var inputFiles = event.target.files;
+      var files = [];
+      var fileLoaded = [].concat(_toConsumableArray(inputFiles)).map(function (inputFile) {
         return new Promise(function (resolve, reject) {
+          if (!_this2.fileFormat) {
+            resolve(inputFile);
+            return;
+          }
           var reader = new FileReader();
 
           // See event handlers of `FileReader` here:
@@ -121,33 +127,45 @@ var InputFileComponent = function () {
           reader.onabort = reject;
           reader.onerror = reject;
 
+          console.log(inputFile);
+
           // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh
           reader.onload = function (infos) {
             return function (readerEvent) {
-              return _this.$timeout(function () {
-                var fileLoaded = { infos: infos, file: readerEvent.target.result };
-                _this.ngModel.push(fileLoaded);
+              return _this2.$timeout(function () {
+                var fileLoaded = {
+                  infos: infos,
+                  file: readerEvent.target.result
+                };
+                files.push(fileLoaded);
                 resolve(fileLoaded);
               });
             };
-          }(file);
+          }({
+            name: inputFile.name,
+            size: inputFile.size,
+            type: inputFile.type,
+            lastModified: inputFile.lastModified
+          });
 
-          switch (_this.fileFormat) {
+          switch (_this2.fileFormat) {
             case 'Text':
-              reader.readAsText(file);
+              reader.readAsText(inputFile);
               break;
             case 'Base64':
-              reader.readAsDataURL(file);
+              reader.readAsDataURL(inputFile);
               break;
             case 'ArrayBuffer':
             default:
-              reader.readAsArrayBuffer(file);
+              reader.readAsArrayBuffer(inputFile);
           }
         });
       });
 
       return Promise.all(fileLoaded).then(function (response) {
-        _this.ngChange(response);
+        if (_this2.filesLoaded) {
+          _this2.filesLoaded(response);
+        }
       });
     }
   }]);
@@ -162,8 +180,7 @@ angular.module('angularjs-input-file', []).component('inputFile', {
     accept: '@',
     fileFormat: '@',
     fileType: '@',
-    ngModel: '=',
-    ngChange: '&'
+    filesLoaded: '<'
   }
 });
 
