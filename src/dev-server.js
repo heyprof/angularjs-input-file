@@ -32,6 +32,11 @@ angular.module('dev-server', [
   <!-- Also accept multiple="true" -->
 </form>
 <form>
+  <label>accept jpg</label>
+  <input-file accept="image/*"></input-file>
+  <!-- Also accept multiple="true" -->
+</form>
+<form>
   <label>ngChange - Default</label>
   <input-file files-loaded="$ctrl.fileChanged"></input-file>
 </form>
