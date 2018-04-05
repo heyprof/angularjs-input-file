@@ -33,8 +33,6 @@ class InputFileComponent {
       reader.onabort = reject;
       reader.onerror = reject;
 
-      console.log(inputFile);
-
       // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh
       reader.onload = (infos => readerEvent => this.$timeout(() => {
         const fileLoaded = {
