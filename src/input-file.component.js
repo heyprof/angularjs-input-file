@@ -6,7 +6,7 @@ class InputFileComponent {
     this.$attrs = $attrs;
   }
 
-  $onInit() {
+  $postLink() {
     const inputElement = this.$element[0].getElementsByTagName('input')[0];
 
     // If there is a multiple attribute different than "false"
