@@ -14,7 +14,7 @@ module.exports = {
   entry: isDev ? './src/dev-server.js' : './src/input-file.component.js',
   output: isTest ? {} : {
     path: path.join(__dirname, '/dist'),
-    filename: 'input-filte.js',
+    filename: 'angularjs-input-file.js',
     chunkFilename: '[name].js'
   },
   module: {

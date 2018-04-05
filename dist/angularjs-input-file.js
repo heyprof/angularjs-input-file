@@ -33,9 +33,6 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -45,6 +42,11 @@
 /******/ 				get: getter
 /******/ 			});
 /******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -62,128 +64,23 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/input-file.component.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "./src/input-file.component.js":
+/*!*************************************!*\
+  !*** ./src/input-file.component.js ***!
+  \*************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var InputFileComponent = function () {
-  /** @ngInject */
-  InputFileComponent.$inject = ["$timeout", "$element", "$attrs"];
-  function InputFileComponent($timeout, $element, $attrs) {
-    _classCallCheck(this, InputFileComponent);
-
-    this.$timeout = $timeout;
-    this.$element = $element;
-    this.$attrs = $attrs;
-  }
-
-  _createClass(InputFileComponent, [{
-    key: '$onInit',
-    value: function $onInit() {
-      var _this = this;
-
-      var inputElement = this.$element[0].getElementsByTagName('input')[0];
-
-      // If there is a multiple attribute different than "false"
-      if (this.$attrs.multiple !== 'false' && (this.$attrs.multiple === '' || this.$attrs.multiple)) {
-        inputElement.setAttribute('multiple', '');
-      }
-      inputElement.addEventListener('change', function (event) {
-        return _this.onInputChange(event);
-      }, false);
-    }
-  }, {
-    key: 'onInputChange',
-    value: function onInputChange(event) {
-      var _this2 = this;
-
-      var inputFiles = event.target.files;
-      var files = [];
-      var fileLoaded = [].concat(_toConsumableArray(inputFiles)).map(function (inputFile) {
-        return new Promise(function (resolve, reject) {
-          if (!_this2.fileFormat) {
-            resolve(inputFile);
-            return;
-          }
-          var reader = new FileReader();
-
-          // See event handlers of `FileReader` here:
-          // https://developer.mozilla.org/en-US/docs/Web/API/FileReader#Properties
-
-          // Catch errors to reject
-          reader.onabort = reject;
-          reader.onerror = reject;
-
-          console.log(inputFile);
-
-          // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh
-          reader.onload = function (infos) {
-            return function (readerEvent) {
-              return _this2.$timeout(function () {
-                var fileLoaded = {
-                  infos: infos,
-                  file: readerEvent.target.result
-                };
-                files.push(fileLoaded);
-                resolve(fileLoaded);
-              });
-            };
-          }({
-            name: inputFile.name,
-            size: inputFile.size,
-            type: inputFile.type,
-            lastModified: inputFile.lastModified
-          });
-
-          switch (_this2.fileFormat) {
-            case 'Text':
-              reader.readAsText(inputFile);
-              break;
-            case 'Base64':
-              reader.readAsDataURL(inputFile);
-              break;
-            case 'ArrayBuffer':
-            default:
-              reader.readAsArrayBuffer(inputFile);
-          }
-        });
-      });
-
-      return Promise.all(fileLoaded).then(function (response) {
-        if (_this2.filesLoaded) {
-          _this2.filesLoaded(response);
-        }
-      });
-    }
-  }]);
-
-  return InputFileComponent;
-}();
-
-angular.module('angularjs-input-file', []).component('inputFile', {
-  template: '<input type="file" accept="{{ $ctrl.accept }}" />',
-  controller: InputFileComponent,
-  bindings: {
-    accept: '@',
-    fileFormat: '@',
-    fileType: '@',
-    filesLoaded: '<'
-  }
-});
+eval("\n\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }\n\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance\"); }\n\nfunction _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === \"[object Arguments]\") return Array.from(iter); }\n\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar InputFileComponent =\n/*#__PURE__*/\nfunction () {\n  InputFileComponent.$inject = [\"$timeout\", \"$element\", \"$attrs\"];\n\n  /** @ngInject */\n  function InputFileComponent($timeout, $element, $attrs) {\n    _classCallCheck(this, InputFileComponent);\n\n    this.$timeout = $timeout;\n    this.$element = $element;\n    this.$attrs = $attrs;\n  }\n\n  _createClass(InputFileComponent, [{\n    key: \"$onInit\",\n    value: function $onInit() {\n      var _this = this;\n\n      this.openSelectorRegister({\n        handler: function handler() {\n          return _this.openSelector();\n        }\n      });\n    }\n  }, {\n    key: \"$postLink\",\n    value: function $postLink() {\n      var _this2 = this;\n\n      var inputElement = this.$element[0].getElementsByTagName('input')[0]; // If there is a multiple attribute different than \"false\"\n\n      if (this.$attrs.multiple !== 'false' && (this.$attrs.multiple === '' || this.$attrs.multiple)) {\n        inputElement.setAttribute('multiple', '');\n      }\n\n      inputElement.addEventListener('change', function (event) {\n        return _this2.onInputChange(event);\n      }, false);\n    }\n  }, {\n    key: \"openSelector\",\n    value: function openSelector() {\n      this.$element.find('input')[0].click();\n    }\n  }, {\n    key: \"onInputChange\",\n    value: function onInputChange(event) {\n      var _this3 = this;\n\n      var inputFiles = event.target.files;\n      var files = [];\n\n      var fileLoaded = _toConsumableArray(inputFiles).map(function (inputFile) {\n        return new Promise(function (resolve, reject) {\n          if (!_this3.fileFormat) {\n            resolve(inputFile);\n            return;\n          }\n\n          var reader = new FileReader(); // See event handlers of `FileReader` here:\n          // https://developer.mozilla.org/en-US/docs/Web/API/FileReader#Properties\n          // Catch errors to reject\n\n          reader.onabort = reject;\n          reader.onerror = reject; // Encapsulatized function for contextualized file + $timeout for proper angularJs refresh\n\n          reader.onload = function (infos) {\n            return function (readerEvent) {\n              return _this3.$timeout(function () {\n                var fileLoaded = {\n                  infos: infos,\n                  file: readerEvent.target.result\n                };\n                files.push(fileLoaded);\n                resolve(fileLoaded);\n              });\n            };\n          }({\n            name: inputFile.name,\n            size: inputFile.size,\n            type: inputFile.type,\n            lastModified: inputFile.lastModified\n          });\n\n          switch (_this3.fileFormat) {\n            case 'Text':\n              reader.readAsText(inputFile);\n              break;\n\n            case 'Base64':\n              reader.readAsDataURL(inputFile);\n              break;\n\n            case 'ArrayBuffer':\n            default:\n              reader.readAsArrayBuffer(inputFile);\n          }\n        });\n      });\n\n      return Promise.all(fileLoaded).then(function (response) {\n        if (_this3.filesLoaded) {\n          _this3.filesLoaded(response);\n        }\n      });\n    }\n  }]);\n\n  return InputFileComponent;\n}();\n\nangular.module('angularjs-input-file', []).component('inputFile', {\n  template: \"\\n  <input type=\\\"file\\\" \\n         id=\\\"{{ $ctrl.id }}\\\"\\n         accept=\\\"{{ $ctrl.accept }}\\\" />\",\n  controller: InputFileComponent,\n  bindings: {\n    inputId: '@',\n    accept: '@',\n    fileFormat: '@',\n    fileType: '@',\n    filesLoaded: '<',\n    openSelectorRegister: '&'\n  }\n});\n\n//# sourceURL=webpack:///./src/input-file.component.js?");
 
 /***/ })
-/******/ ]);
-//# sourceMappingURL=angularjs-input-file.map
+
+/******/ });
