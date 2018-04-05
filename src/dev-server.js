@@ -2,25 +2,37 @@ import angular from 'angular';
 
 import './input-file.component';
 
-function DevServerComponent($timeout) {
-  const vm = this;
-  vm.$onInit = () => {
-    vm.files = [];
-  };
+class DevServerComponent {
+  constructor($timeout) {
+    this.$timeout = $timeout;
+  }
 
-  vm.fileChanged = result => {
+  $onInit() {
+    this.files = [];
+  }
+
+  fileChanged(result) {
     console.log('Hey !', result);
-    vm.files.length = 0;
-    $timeout(() => {
-      [].push.apply(vm.files, result);
+    this.files.length = 0;
+    this.$timeout(() => {
+      [].push.apply(this.files, result);
     });
-  };
+  }
+
+  openSelectorRegister(handler) {
+    this._openSelector = handler;
+  }
+
+  openSelector() {
+    this._openSelector();
+    console.log(this.aFunction);
+  }
 }
 
 angular.module('dev-server', [
   'angularjs-input-file'
 ]).component('devServer', {
-  controller: ['$timeout', DevServerComponent],
+  controller: DevServerComponent,
   template: `
 <form>
   <label>no params</label>
