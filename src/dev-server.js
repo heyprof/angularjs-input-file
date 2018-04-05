@@ -24,7 +24,9 @@ angular.module('dev-server', [
   template: `
 <form>
   <label>no params</label>
-  <input-file data-ng-model="$ctrl.files" id="heyId"></input-file>
+  <input-file data-ng-model="$ctrl.files"
+              id="heyId"
+              open-selector-register="$ctrl.openSelectorRegister(handler)"></input-file>
 </form>
 <form>
   <label>multiple</label>
@@ -57,5 +59,7 @@ angular.module('dev-server', [
   <h3>Result:</h3>
   <pre>{{ $ctrl.files | json }}</pre>
 </div>
+
+<button ng-click="$ctrl.openSelector()">Button opening the file selector dialog from the first input-file</button>
 `
 });

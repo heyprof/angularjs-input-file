@@ -6,6 +6,12 @@ class InputFileComponent {
     this.$attrs = $attrs;
   }
 
+  $onInit() {
+    this.openSelectorRegister({
+      handler: () => this.openSelector()
+    });
+  }
+
   $postLink() {
     const inputElement = this.$element[0].getElementsByTagName('input')[0];
 
@@ -14,6 +20,10 @@ class InputFileComponent {
       inputElement.setAttribute('multiple', '');
     }
     inputElement.addEventListener('change', event => this.onInputChange(event), false);
+  }
+
+  openSelector() {
+    this.$element.find('input')[0].click();
   }
 
   onInputChange(event) {
@@ -80,6 +90,7 @@ angular.module('angularjs-input-file', []).component('inputFile', {
     accept: '@',
     fileFormat: '@',
     fileType: '@',
-    filesLoaded: '<'
+    filesLoaded: '<',
+    openSelectorRegister: '&'
   }
 });
