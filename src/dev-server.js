@@ -22,7 +22,6 @@ class DevServerComponent {
 
   openSelector() {
     this._openSelector();
-    console.log(this.aFunction);
   }
 }
 
