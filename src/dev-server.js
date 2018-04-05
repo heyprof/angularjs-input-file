@@ -24,7 +24,7 @@ angular.module('dev-server', [
   template: `
 <form>
   <label>no params</label>
-  <input-file data-ng-model="$ctrl.files"></input-file>
+  <input-file data-ng-model="$ctrl.files" id="heyId"></input-file>
 </form>
 <form>
   <label>multiple</label>
