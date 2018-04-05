@@ -5,17 +5,14 @@ import './input-file.component';
 class DevServerComponent {
   constructor($timeout) {
     this.$timeout = $timeout;
-  }
-
-  $onInit() {
     this.files = [];
+
+    this.fileChangedBind = result => this.fileChanged(result);
   }
 
   fileChanged(result) {
-    console.log('Hey !', result);
-    this.files.length = 0;
     this.$timeout(() => {
-      [].push.apply(this.files, result);
+      this.files = result;
     });
   }
 
@@ -52,24 +49,29 @@ angular.module('dev-server', [
 </form>
 <form>
   <label>ngChange - Default</label>
-  <input-file files-loaded="$ctrl.fileChanged"></input-file>
+  <input-file files-loaded="$ctrl.fileChangedBind"
+              multiple="true"></input-file>
 </form>
 <form>
   <label>ngChange - Base64</label>
-  <input-file files-loaded="$ctrl.fileChanged"
+  <input-file files-loaded="$ctrl.fileChangedBind"
               file-format="Base64">
   </input-file>
 </form>
 <form>
   <label>ngChange - Text</label>
-  <input-file files-loaded="$ctrl.fileChanged"
+  <input-file files-loaded="$ctrl.fileChangedBind"
               file-format="Text">
   </input-file>
 </form>
 
 <div>
-  <h3>Result:</h3>
-  <pre>{{ $ctrl.files | json }}</pre>
+  <h3>Result: {{ $ctrl.files && $ctrl.files.length }}</h3>
+  <ul>
+    <li ng-repeat="file in $ctrl.files">
+      <pre ng-bind="file.infos && file.infos.name || file.name"></pre>
+    </li>
+  </ul>
 </div>
 
 <button ng-click="$ctrl.openSelector()">Button opening the file selector dialog from the first input-file</button>
