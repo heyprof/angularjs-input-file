@@ -73,7 +73,9 @@ class InputFileComponent {
 
     return Promise.all(fileLoaded).then(response => {
       if (this.filesLoaded) {
-        this.filesLoaded(response);
+        this.filesLoaded({
+          files: response
+        });
       }
     });
   }
@@ -90,7 +92,7 @@ angular.module('angularjs-input-file', []).component('inputFile', {
     accept: '@',
     fileFormat: '@',
     fileType: '@',
-    filesLoaded: '<',
+    filesLoaded: '&',
     openSelectorRegister: '&'
   }
 });
