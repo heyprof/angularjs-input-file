@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:9
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -28,6 +28,10 @@ jobs:
 
       - run: npm i
 
+      - run: npm i greenkeeper-lockfile@1
+
+      - run: npx greenkeeper-lockfile-update
+
       - save_cache:
           paths:
             - node_modules
@@ -35,3 +39,5 @@ jobs:
         
       # run tests!
       - run: npm test
+
+      - run: npx greenkeeper-lockfile-upload
