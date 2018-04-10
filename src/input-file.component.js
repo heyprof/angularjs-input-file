@@ -1,6 +1,7 @@
 class InputFileComponent {
   /** @ngInject */
-  constructor($timeout, $element, $attrs) {
+  constructor($q, $timeout, $element, $attrs) {
+    this.$q = $q;
     this.$timeout = $timeout;
     this.$element = $element;
     this.$attrs = $attrs;
@@ -29,7 +30,7 @@ class InputFileComponent {
   onInputChange(event) {
     const inputFiles = event.target.files;
     const files = [];
-    const fileLoaded = [...inputFiles].map(inputFile => new Promise((resolve, reject) => {
+    const fileLoaded = [...inputFiles].map(inputFile => this.$q((resolve, reject) => {
       if (!this.fileFormat) {
         resolve(inputFile);
         return;
@@ -71,12 +72,10 @@ class InputFileComponent {
       }
     }));
 
-    return Promise.all(fileLoaded).then(response => {
-      if (this.filesLoaded) {
-        this.filesLoaded({
-          files: response
-        });
-      }
+    return this.$q.all(fileLoaded).then(response => {
+      this.filesLoaded({
+        files: response
+      });
     });
   }
 }
