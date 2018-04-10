@@ -1,5 +1,7 @@
 # angularjs-input-file
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/heyprof/angularjs-input-file.svg)](https://greenkeeper.io/)
+
 [![GitHub release][badge-release-img]][badge-release-lnk]
 [![Dependencies Status][badge-dependencies-img]][badge-dependencies-lnk]
 [![Dev Dependencies Status][badge-dev-dependencies-img]][badge-dev-dependencies-lnk]
