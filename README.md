@@ -1,10 +1,7 @@
 # angularjs-input-file
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/heyprof/angularjs-input-file.svg)](https://greenkeeper.io/)
-
 [![GitHub release][badge-release-img]][badge-release-lnk]
-[![Dependencies Status][badge-dependencies-img]][badge-dependencies-lnk]
-[![Dev Dependencies Status][badge-dev-dependencies-img]][badge-dev-dependencies-lnk]
+[![Greenkeeper badge][badge-greenkeeper-img]][badge-greenkeeper-lnk]
 [![Travis CI Status][badge-travis-img]][badge-travis-lnk]
 [![Code Climate Status][badge-code-climate-status-img]][badge-code-climate-status-lnk]
 [![Code Climate Issues][badge-code-climate-issues-img]][badge-code-climate-issues-lnk]
@@ -97,17 +94,15 @@ SOFTWARE.
 
 [site]: https://heyprof.github.io/angularjs-input-file/
 
-[badge-release-img]: https://img.shields.io/github/release/heyprof/angularjs-input-file/all.svg?style=flat-square
+[badge-release-img]: https://img.shields.io/github/release/heyprof/angularjs-input-file/all.svg
 [badge-release-lnk]: https://github.com/heyprof/angularjs-input-file/releases
-[badge-dependencies-img]: https://img.shields.io/david/heyprof/angularjs-input-file.svg?style=flat-square
-[badge-dependencies-lnk]: https://david-dm.org/heyprof/angularjs-input-file
-[badge-dev-dependencies-img]: https://img.shields.io/david/dev/heyprof/angularjs-input-file.svg?style=flat-square
-[badge-dev-dependencies-lnk]: https://david-dm.org/heyprof/angularjs-input-file?type=dev
-[badge-travis-img]: https://img.shields.io/travis/heyprof/angularjs-input-file.svg?style=flat-square&label=TravisCI
+[badge-greenkeeper-img]: https://badges.greenkeeper.io/heyprof/angularjs-input-file.svg
+[badge-greenkeeper-lnk]: https://greenkeeper.io/
+[badge-travis-img]: https://img.shields.io/travis/heyprof/angularjs-input-file.svg?label=TravisCI
 [badge-travis-lnk]: https://travis-ci.org/heyprof/angularjs-input-file
-[badge-code-climate-status-img]: https://img.shields.io/codeclimate/github/heyprof/angularjs-input-file.svg?style=flat-square&label=climate
+[badge-code-climate-status-img]: https://img.shields.io/codeclimate/github/heyprof/angularjs-input-file.svg?label=climate
 [badge-code-climate-status-lnk]: https://codeclimate.com/github/heyprof/angularjs-input-file
-[badge-code-climate-issues-img]: https://img.shields.io/codeclimate/issues/github/heyprof/angularjs-input-file.svg?style=flat-square&label=climate&nbsp;issues
+[badge-code-climate-issues-img]: https://img.shields.io/codeclimate/issues/github/heyprof/angularjs-input-file.svg?label=climate&nbsp;issues
 [badge-code-climate-issues-lnk]: https://codeclimate.com/github/heyprof/angularjs-input-file/issues
-[badge-license-img]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
+[badge-license-img]: https://img.shields.io/badge/license-MIT-blue.svg
 [badge-license-lnk]: https://raw.githubusercontent.com/heyprof/angularjs-input-file/master/LICENSE
