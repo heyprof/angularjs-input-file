@@ -3,6 +3,7 @@
 [![GitHub release][badge-release-img]][badge-release-lnk]
 [![Greenkeeper badge][badge-greenkeeper-img]][badge-greenkeeper-lnk]
 [![Travis CI Status][badge-travis-img]][badge-travis-lnk]
+[![CircleCI][badge-circleci-img]][badge-circleci-lnk]
 [![Code Climate Status][badge-code-climate-status-img]][badge-code-climate-status-lnk]
 [![Code Climate Issues][badge-code-climate-issues-img]][badge-code-climate-issues-lnk]
 [![License][badge-license-img]][badge-license-lnk]
@@ -98,8 +99,8 @@ SOFTWARE.
 [badge-release-lnk]: https://github.com/heyprof/angularjs-input-file/releases
 [badge-greenkeeper-img]: https://badges.greenkeeper.io/heyprof/angularjs-input-file.svg
 [badge-greenkeeper-lnk]: https://greenkeeper.io/
-[badge-travis-img]: https://img.shields.io/travis/heyprof/angularjs-input-file.svg?label=TravisCI
-[badge-travis-lnk]: https://travis-ci.org/heyprof/angularjs-input-file
+[badge-circleci-img]: https://circleci.com/gh/heyprof/angularjs-input-file/tree/master.svg?style=svg
+[badge-circleci-lnk]: https://circleci.com/gh/heyprof/angularjs-input-file/tree/master
 [badge-code-climate-status-img]: https://img.shields.io/codeclimate/github/heyprof/angularjs-input-file.svg?label=climate
 [badge-code-climate-status-lnk]: https://codeclimate.com/github/heyprof/angularjs-input-file
 [badge-code-climate-issues-img]: https://img.shields.io/codeclimate/issues/github/heyprof/angularjs-input-file.svg?label=climate&nbsp;issues
