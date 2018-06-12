@@ -57,7 +57,7 @@
     "karma-webpack": "^3.0.0",
     "phantomjs-prebuilt": "^2.1.16",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13",
+    "webpack-cli": "^3.0.4",
     "webpack-serve": "^0.3.1"
   }
 }
