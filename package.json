@@ -58,6 +58,6 @@
     "phantomjs-prebuilt": "^2.1.16",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
-    "webpack-serve": "^0.3.1"
+    "webpack-serve": "^2.0.1"
   }
 }
