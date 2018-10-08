@@ -85,7 +85,7 @@ angular.module('angularjs-input-file', []).component('inputFile', {
   <input type="file" 
          ng-attr-accept="{{ $ctrl.accept }}"
          ng-attr-id="{{ $ctrl.inputId }}"
-         ng-disabled="$ctrl.isDisabled" />`,
+         ng-disabled="$ctrl.disabled" />`,
   controller: InputFileComponent,
   bindings: {
     inputId: '@',
