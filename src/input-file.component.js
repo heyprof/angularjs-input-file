@@ -83,14 +83,16 @@ class InputFileComponent {
 angular.module('angularjs-input-file', []).component('inputFile', {
   template: `
   <input type="file" 
-         id="{{ $ctrl.id }}"
-         accept="{{ $ctrl.accept }}" />`,
+         ng-attr-accept="{{ $ctrl.accept }}"
+         ng-attr-id="{{ $ctrl.inputId }}"
+         ng-disabled="$ctrl.isDisabled" />`,
   controller: InputFileComponent,
   bindings: {
     inputId: '@',
     accept: '@',
     fileFormat: '@',
     fileType: '@',
+    disabled: '<isDisabled',
     filesLoaded: '&',
     openSelectorRegister: '&'
   }
